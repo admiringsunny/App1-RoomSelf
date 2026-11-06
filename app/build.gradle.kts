@@ -37,12 +37,6 @@ android {
 }
 
 dependencies {
-    val room_version = "2.8.4"
-    implementation("androidx.room:room-runtime:$room_version")
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
-    ksp("androidx.room:room-compiler:$room_version")
-
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -60,4 +54,15 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // room DB
+    val room_version = "2.8.4"
+    implementation("androidx.room:room-runtime:$room_version")
+    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+    // See Add the KSP plugin to your project
+    ksp("androidx.room:room-compiler:$room_version")
+    // Navigation 3 core
+    implementation("androidx.navigation3:navigation3-runtime:1.1.7")
+    // Displays navigation destinations
+    implementation("androidx.navigation3:navigation3-ui:1.1.7")
 }

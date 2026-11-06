@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 
 @Preview(showBackground = true)
 @Composable
-fun StudentScreen(modifier: Modifier = Modifier) {
+fun StudentsScreen(modifier: Modifier = Modifier, onStudentClick: (Student) -> Unit = {}) {
     val context = LocalContext.current
     val database = remember {
         StudentDB.getDatabase(context)
@@ -129,7 +129,7 @@ fun StudentScreen(modifier: Modifier = Modifier) {
                         items = students,
                         key = { it.id }
                     ) { student ->
-                        StudentItem(student, scope, dao)
+                        StudentItem(student, scope, dao, onStudentClick)
                     }
                 }
             }
@@ -138,7 +138,12 @@ fun StudentScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun StudentItem(student: Student = Student(0, "", "", ""), scope: CoroutineScope, dao: StudentDao) {
+fun StudentItem(
+    student: Student = Student(0, "", "", ""),
+    scope: CoroutineScope,
+    dao: StudentDao,
+    onStudentClick: (Student) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -168,9 +173,7 @@ fun StudentItem(student: Student = Student(0, "", "", ""), scope: CoroutineScope
                         )
                     }
                     IconButton(
-                        onClick = {
-
-                        }
+                        onClick = { onStudentClick(student) }
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,
